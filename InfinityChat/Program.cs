@@ -1,15 +1,14 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using InfinityChat.Data;
+using InfinityChat.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();
+
+ApplicationSettingsService.Configuration = builder.Configuration;
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -14,27 +14,26 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
-      <Folder Include="Views" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <AdditionalFiles Include="Views\Pages\Counter.razor" />
-      <AdditionalFiles Include="Views\Pages\Error.cshtml" />
-      <AdditionalFiles Include="Views\Pages\FetchData.razor" />
-      <AdditionalFiles Include="Views\Pages\Index.razor" />
-      <AdditionalFiles Include="Views\Pages\_Host.cshtml" />
-      <AdditionalFiles Include="Views\Shared\MainLayout.razor" />
-      <AdditionalFiles Include="Views\Shared\NavMenu.razor" />
-      <AdditionalFiles Include="Views\Shared\SurveyPrompt.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\_Host.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Counter.razor" />
-      <_ContentIncludedByDefault Remove="Pages\FetchData.razor" />
       <_ContentIncludedByDefault Remove="Pages\Index.razor" />
+      <_ContentIncludedByDefault Remove="Views\Pages\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Pages\_Host.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Pages\Counter.razor" />
+      <_ContentIncludedByDefault Remove="Views\Pages\FetchData.razor" />
+      <_ContentIncludedByDefault Remove="Views\Pages\Index.razor" />
+      <_ContentIncludedByDefault Remove="Views\Shared\MainLayout.razor" />
+      <_ContentIncludedByDefault Remove="Views\Shared\NavMenu.razor" />
+      <_ContentIncludedByDefault Remove="Views\Shared\SurveyPrompt.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     </ItemGroup>
 
 </Project>
