@@ -4,23 +4,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InfinityChat.Controllers;
 
-public class ChatMessageController
+public class ChatMessageController : Controller
 {
-    private static ChatContext db = new ChatContext(ApplicationSettingsService.Configuration);
-    
     public List<ChatMessage> GetAll()
     {
-        var query = from chatMessage in db.ChatMessages select chatMessage;
-        return query.ToList();
+        using (ChatContext db = new ChatContext(ApplicationSettingsService.Configuration))
+        {
+            var query = from chatMessage in db.ChatMessages select chatMessage;
+            return query.ToList();
+        }
     }
 
     public ChatMessage? GetById(int id)
     {
-        var query = from chatMessage in db.ChatMessages where chatMessage.Id == id select chatMessage;
-        return query.FirstOrDefault();
+        using (ChatContext db = new ChatContext(ApplicationSettingsService.Configuration))
+        {
+            var query = from chatMessage in db.ChatMessages where chatMessage.Id == id select chatMessage;
+            return query.FirstOrDefault();
+        }
     }
 
-    public IActionResult CreateMessage(string Author, string Message)
+    public void AddChatMessage(ChatMessage chatMessage)
+    {
+        using (ChatContext db = new ChatContext(ApplicationSettingsService.Configuration))
+        {
+            db.ChatMessages.Add(chatMessage);
+            db.SaveChanges();
+        }
+    }
+    
+    public void Create(string Author, string Message)
     {
         AddChatMessage(new ChatMessage()
         {
@@ -28,13 +41,5 @@ public class ChatMessageController
             Message = Message,
             TimeStamp = DateTime.Now
         });
-
-        return null;
-    }
-    
-    public void AddChatMessage(ChatMessage chatMessage)
-    {
-        db.ChatMessages.Add(chatMessage);
-        db.SaveChanges();
     }
 }

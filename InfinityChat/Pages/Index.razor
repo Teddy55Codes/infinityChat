@@ -1,0 +1,58 @@
+﻿@page "/"
+@using InfinityChat.Controllers
+@using InfinityChat.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+@{
+    var chatMessageController = new ChatMessageController();
+    var messages = chatMessageController.GetAll();
+    var pageTitle = $"{messages.Count} messages";
+}
+
+<PageTitle>@pageTitle</PageTitle>
+
+<EditForm Model="@newMessage" OnValidSubmit="@CreateMessage">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <fieldset>
+        <div>
+            <h3>Author</h3>
+            <InputText name="Author" @bind-Value="newMessage.Author"/>
+        </div>
+        <div>
+            <h3>Message</h3>
+            <InputText name="Message" @bind-Value="newMessage.Message"/>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </fieldset>
+</EditForm>
+
+<div class="text-center">
+    <h1 class="display-4">Chat</h1>
+    @foreach (var message in messages)
+    {
+        <div>
+            <h2>@message.Author</h2>
+            <p>@message.TimeStamp</p>
+            <p>@message.Message</p>
+        </div>
+    }
+
+
+</div>
+
+@code {
+    private ChatMessage newMessage = new ChatMessage();
+
+    private void CreateMessage()
+    {
+        var chatMessageController = new ChatMessageController();
+        newMessage.TimeStamp = DateTime.Now;
+        chatMessageController.AddChatMessage(newMessage);
+        newMessage = new ChatMessage();
+    }
+
+}
