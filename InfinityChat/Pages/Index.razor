@@ -49,10 +49,13 @@
 
     private void CreateMessage()
     {
-        var chatMessageController = new ChatMessageController();
-        newMessage.TimeStamp = DateTime.Now;
-        chatMessageController.AddChatMessage(newMessage);
-        newMessage = new ChatMessage();
+        if (newMessage.Author != null && newMessage.Message != null && newMessage.Author != string.Empty && newMessage.Message != string.Empty)
+        {
+            var chatMessageController = new ChatMessageController();
+            newMessage.TimeStamp = DateTime.Now;
+            chatMessageController.AddChatMessage(newMessage);
+            newMessage = new ChatMessage();
+        }
     }
 
 }
