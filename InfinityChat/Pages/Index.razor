@@ -58,7 +58,9 @@
 
     private void CreateMessage()
     {
-        if (newMessage.Author != null && newMessage.Message != null && newMessage.Author != string.Empty && newMessage.Message != string.Empty)
+        if (newMessage.Author != null && newMessage.Message != null && 
+            newMessage.Author != string.Empty && newMessage.Message != string.Empty && 
+            newMessage.Author.Length <= 200 && newMessage.Message.Length <= 1000)
         {
             var chatMessageController = new ChatMessageController();
             newMessage.TimeStamp = DateTime.Now;
