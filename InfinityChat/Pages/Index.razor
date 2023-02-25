@@ -65,7 +65,10 @@
             var chatMessageController = new ChatMessageController();
             newMessage.TimeStamp = DateTime.Now;
             chatMessageController.AddChatMessage(newMessage);
-            newMessage = new ChatMessage();
+            newMessage = new ChatMessage()
+            {
+                Author = newMessage.Author
+            };
         }
     }
 
