@@ -1,7 +1,57 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Consolas', Helvetica, Arial, sans-serif;
+    background: black;
+    
+    color: #30ca30;
+}
+
+input, textarea {
+    background-color : black;
+    outline-color: black;
+    color: #30ca30;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-color: #30ca30;
+}
+
+input:focus {
+    outline:none;
+}
+
+#authorText {
+    width: 30%;
+}
+
+#messageText {
+    width: 90%;
+}
+
+button {
+    border-color: #30ca30;
+    background-color: black;
+    color: #30ca30;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.message {
+    margin-top: 10px;
+}
+
+#chatInput {
+    
+}
+
+#messages {
+    margin-bottom: 70px;
+}
+
+footer {
+    background-color: black;
 }
 
 h1:focus {
