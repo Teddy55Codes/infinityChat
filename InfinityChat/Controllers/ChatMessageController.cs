@@ -10,7 +10,7 @@ public class ChatMessageController : Controller
     {
         using (ChatContext db = new ChatContext(ApplicationSettingsService.Configuration))
         {
-            var query = from chatMessage in db.ChatMessages select chatMessage;
+            var query = from chatMessage in db.ChatMessages orderby chatMessage.Id descending select chatMessage;
             return query.ToList();
         }
     }
