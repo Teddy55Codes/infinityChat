@@ -1,0 +1,28 @@
+﻿version: "3"
+services: 
+  infinity-chat-db:
+    image: mysql:latest
+    networks: 
+      - intern
+    container_name: "InfinityChat-db"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=sml12345"
+    ports:
+      - "3306:3306"
+  razor:
+    build: 
+      context: "./"
+      dockerfile: "./Dockerfile"
+    networks:
+      - extern
+      - intern
+    ports:
+      - "80:80"
+      - "443:443"
+
+networks:
+  intern:
+    driver: bridge
+    internal: true
+  extern:
+    driver: bridge
