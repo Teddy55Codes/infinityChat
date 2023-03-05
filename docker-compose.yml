@@ -23,9 +23,8 @@ services:
     environment:
       - "ASPNETCORE_ENVIRONMENT=Development"
     networks:
-      intern:
-        ipv4_address: 172.20.0.3
-      extern:
+      - intern
+      - extern
         
     ports:
       - "80:80"
