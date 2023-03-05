@@ -3,7 +3,8 @@ services:
   infinity-chat-db:
     image: mysql:latest
     networks: 
-      - intern
+      intern:
+        ipv4_address: 172.20.0.2
     container_name: "InfinityChat-db"
     environment:
       - "MYSQL_ROOT_PASSWORD=sml12345"
@@ -13,9 +14,13 @@ services:
     build: 
       context: "./"
       dockerfile: "./Dockerfile"
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=Development"
     networks:
-      - extern
-      - intern
+      intern:
+        ipv4_address: 172.20.0.3
+      extern:
+        
     ports:
       - "80:80"
       - "443:443"
@@ -24,5 +29,10 @@ networks:
   intern:
     driver: bridge
     internal: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
   extern:
     driver: bridge
