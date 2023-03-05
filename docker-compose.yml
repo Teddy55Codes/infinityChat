@@ -10,7 +10,13 @@ services:
       - "MYSQL_ROOT_PASSWORD=sml12345"
     ports:
       - "3306:3306"
-  razor:
+    # This healthcheck exists because the mysql db needs to be accessible for the ef migration. 
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-psml12345" ]
+      interval: 5s
+      timeout: 2s
+      retries: 4
+  blazor:
     build: 
       context: "./"
       dockerfile: "./Dockerfile"
@@ -23,7 +29,9 @@ services:
         
     ports:
       - "80:80"
-      - "443:443"
+    depends_on:
+      infinity-chat-db:
+        condition: service_healthy
 
 networks:
   intern:

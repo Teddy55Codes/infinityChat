@@ -1,4 +1,6 @@
+using InfinityChat.Models;
 using InfinityChat.Services;
+using Microsoft.EntityFrameworkCore;
 
 public class Program
 {
@@ -9,8 +11,19 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
-
+        builder.Services.AddDbContext<ChatContext>(options =>
+            options.UseMySql(
+                builder.Configuration.GetConnectionString("ChatContext"),
+                new MySqlServerVersion(new Version(8, 0, 26))));
+        
         var app = builder.Build();
+        
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            var context = services.GetRequiredService<ChatContext>();
+            context.Database.Migrate();
+        }
 
         ApplicationSettingsService.Configuration = builder.Configuration;
 
